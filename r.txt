@@ -17,17 +17,16 @@ $datas = $datas->receiptShow();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
 </head>
 <style>
-    * {
+    *{
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-
     body {
         padding: 1rem 1rem 1rem 1rem;
         max-width: 700px;
@@ -389,23 +388,31 @@ $datas = $datas->receiptShow();
     <button id="saveImage">Save as Image</button>
 
     <script>
-
-        document.getElementById('saveImage').addEventListener('click', function() {
         const container = document.querySelector('.container');
 
-            html2canvas(document.body, {
-                onrendered: function(canvas) {
-                    // Convert the canvas to an image
+        window.onload = function() {
+            document
+                .getElementById("saveImage")
+                .addEventListener("click", function() {
+                    html2canvas(container, {
+                    scale: 2, // Increase scale for better text rendering
+                   
+                    useCORS: true, // Try to load images with CORS enabled
+                    logging: true, // For debugging
+                    letterRendering: true, // Force render text as shapes
+                    allowTaint: true, // Allow cross-origin images
+                    foreignObjectRendering: true // Experimental: might help with text rendering
+                }).then(function(canvas) {
                     var imgData = canvas.toDataURL("image/png");
-
-                    // Create a link element to download the image
-                    var link = document.createElement('a');
+                    var link = document.createElement("a");
+                    link.download = "page-image.png";
                     link.href = imgData;
-                    link.download = 'page-image.png';
+                    document.body.appendChild(link);
                     link.click();
-                }
-            });
-        });
+                    document.body.removeChild(link);
+                });
+                });
+        };
     </script>
 </body>
 
