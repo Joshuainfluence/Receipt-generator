@@ -276,7 +276,7 @@ $datas = $datas->receiptShow();
     <?php
     foreach ($datas as $row):
     ?>
-        <div class="container">
+        <div class="container" id="container">
             <div class="row">
                 <img src="include/log/<?= $row['logo'] ?>" alt="">
             </div>
@@ -289,29 +289,29 @@ $datas = $datas->receiptShow();
                 </div>
             </div>
             <div class="row-name">
-                <h4><?= $row['send_company_name'] ?> Company</h4>
-                <h4>Address: <?= $row['sender_company_address'] ?></h4>
+                <h4><?= ucwords($row['send_company_name']) ?> Company</h4>
+                <h4>Address: <?= ucfirst($row['sender_company_address']) ?></h4>
 
-                <h4>Email: <?= $row['sender_company_email'] ?></h4>
+                <h4>Email: <?= ucfirst($row['sender_company_email']) ?></h4>
 
-                <h4>Company Website:<?= $row['sender_company_website'] ?></h4>
+                <h4>Company Website: <?= ucfirst($row['sender_company_website']) ?></h4>
 
             </div>
             <div class="row-details">
                 <div class="col-details">
                     <h4>FROM (SENDER)</h4>
-                    <h4><?= $row['sender_fname'] . " " . $row['sender_lname'] ?> </h4>
-                    <h4><b>Address: </b> <?= $row['sender_company_address'] ?></h4>
+                    <h4><?= ucfirst($row['sender_fname']) . " " . ucfirst($row['sender_lname']) ?> </h4>
+                    <h4><b>Address: </b> <?= ucwords($row['sender_company_address']) ?></h4>
                     <h4><b>Origin Office: </b><?= $row['origin_office'] ?></h4>
 
                 </div>
                 <div class="col2-details">
                     <h4>TO (CONSIGNEE)</h4>
-                    <h4><?= $row['receiver_fname'] . " " . $row['receiver_lname'] ?></h4>
+                    <h4><?= ucfirst($row['receiver_fname']) . " " . ucfirst($row['receiver_lname']) ?></h4>
                     <h4><b>Phone: </b> <?= $row['receiver_phone'] ?></h4>
 
-                    <h4><b>Address: </b> <?= $row['receiver_address'] ?></h4>
-                    <h4><b>Destination Office: </b> <?= $row['destination_office'] ?></h4>
+                    <h4><b>Address: </b> <?= ucwords($row['receiver_address']) ?></h4>
+                    <h4><b>Destination Office: </b> <?= ucwords($row['destination_office']) ?></h4>
 
                 </div>
                 <div class="col3-details">
@@ -349,11 +349,11 @@ $datas = $datas->receiptShow();
                     <tbody>
                         <tr>
                             <td><?= $row['quantity'] ?></td>
-                            <td><?= $row['product_name'] ?></td>
+                            <td><?= ucwords($row['product_name']) ?></td>
                             <td>
                                 <div>Approved</div>
                             </td>
-                            <td><?= $row['description'] ?></td>
+                            <td><?= ucwords($row['description']) ?></td>
                             <td>USD <?= $row['shipping_cost'] ?></td>
                             <td>USD <?= $row['clearance_cost'] ?></td>
                             <td>USD <?= $row['shipping_cost'] + $row['clearance_cost'] ?></td>
@@ -391,9 +391,9 @@ $datas = $datas->receiptShow();
     <script>
 
         document.getElementById('saveImage').addEventListener('click', function() {
-        const container = document.querySelector('.container');
+        const container = document.getElementById('container');
 
-            html2canvas(document.body, {
+            html2canvas(container, {
                 onrendered: function(canvas) {
                     // Convert the canvas to an image
                     var imgData = canvas.toDataURL("image/png");
@@ -401,7 +401,7 @@ $datas = $datas->receiptShow();
                     // Create a link element to download the image
                     var link = document.createElement('a');
                     link.href = imgData;
-                    link.download = 'page-image.png';
+                    link.download = 'receipt-image.png';
                     link.click();
                 }
             });
