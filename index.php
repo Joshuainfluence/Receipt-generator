@@ -46,7 +46,8 @@ require_once __DIR__ . "/config/session.php";
             <div class="col-sm-12 col-md-12 col-lg-6 offset-lg-3">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h3>Generate Your reciept</h3>
+                        <h3 class="text-center text-primary">INFLUENCE RECEIPT GENERATOR</h3>
+                        <h3 class="text-center">Generate Your reciept</h3>
                         <form action="include/signup.include.php" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <h3>Sender</h3>
@@ -126,7 +127,7 @@ require_once __DIR__ . "/config/session.php";
                             </div>
 
                             <div class="form-group mt-2">
-                                <h3>Recipient</h3>
+                                <h3>Receiver</h3>
                             </div>
                             <div class="row">
                                 <div class="col">

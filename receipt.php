@@ -368,7 +368,7 @@ $datas = $datas->receiptShow();
                     <img src="assets/img/payment.png" alt="">
                 </div>
                 <div class="col-payment">
-                    <h4>Official Stamp/ </h4>
+                    <h4>Official Stamp/<?= date('M j, Y', strtotime($row['del_time']))?> </h4>
                     <img src="assets/img/official.png" alt="">
                     <h4>Amount Due</h4>
 
