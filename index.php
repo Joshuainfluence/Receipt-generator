@@ -160,6 +160,11 @@ require_once __DIR__ . "/config/session.php";
                                     placeholder="Enter your Company name" />
                                 <label for="floatingInput">Enter Destination Office</label>
                             </div>
+                            <div class="form-floating mb-3">
+                                <input type="number" name="routingNo" id="floatingInput" class="form-control"
+                                    placeholder="Enter Routing Number" />
+                                <label for="floatingInput">Enter Routing Number</label>
+                            </div>
                             <div class="form-group mb-3">
                                 <input type="submit" value="Generate" class="btn btn-primary w-100 btn-lg" />
                             </div>

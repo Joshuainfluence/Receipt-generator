@@ -23,8 +23,9 @@ class SignupContr extends Signup
     private $destination_office;
     private $order_id;
     private $tracking_no;
+    private $routingNo;
 
-   
+
 
     // for image validation
     private $logo;
@@ -46,7 +47,7 @@ class SignupContr extends Signup
     // public $verification;
 
 
-    public function __construct($sender_company_name, $sender_company_address, $sender_company_email, $company_website, $sender_fname, $sender_lname, $origin_office, $product_name, $quantity, $shipping_cost, $clearance_cost, $description, $files, $receiver_fname, $receiver_lname, $receiver_address, $receiver_phone, $destination_office, $order_id, $tracking_no)
+    public function __construct($sender_company_name, $sender_company_address, $sender_company_email, $company_website, $sender_fname, $sender_lname, $origin_office, $product_name, $quantity, $shipping_cost, $clearance_cost, $description, $files, $receiver_fname, $receiver_lname, $receiver_address, $receiver_phone, $destination_office, $order_id, $tracking_no, $routingNo)
     {
         $this->sender_company_name = $sender_company_name;
         $this->sender_company_address = $sender_company_address;
@@ -67,6 +68,7 @@ class SignupContr extends Signup
         $this->destination_office = $destination_office;
         $this->order_id = $order_id;
         $this->tracking_no = $tracking_no;
+        $this->routingNo = $routingNo;
 
         // fpr image
         // Use $files['product_image'] instead of $files['image']
@@ -79,7 +81,7 @@ class SignupContr extends Signup
     private function emptyInput()
     {
         $result = 0;
-        if (empty($this->sender_company_name) || empty($this->sender_company_address) || empty($this->sender_company_email) || empty($this->company_website) || empty($this->sender_fname) || empty($this->sender_lname) || empty($this->origin_office) || empty($this->product_name) || empty($this->quantity) || empty($this->shipping_cost) || empty($this->clearance_cost) || empty($this->description) || empty($this->receiver_fname) || empty($this->receiver_lname) || empty($this->receiver_address) || empty($this->receiver_phone) || empty($this->destination_office) || empty($this->order_id) || empty($this->tracking_no) || empty($this->image_name)) {
+        if (empty($this->sender_company_name) || empty($this->sender_company_address) || empty($this->sender_company_email) || empty($this->company_website) || empty($this->sender_fname) || empty($this->sender_lname) || empty($this->origin_office) || empty($this->product_name) || empty($this->quantity) || empty($this->shipping_cost) || empty($this->clearance_cost) || empty($this->description) || empty($this->receiver_fname) || empty($this->receiver_lname) || empty($this->receiver_address) || empty($this->receiver_phone) || empty($this->destination_office) || empty($this->order_id) || empty($this->tracking_no) || empty($this->image_name) || empty($this->routingNo)) {
             $result = true;
         } else {
             $result = false;
@@ -87,8 +89,16 @@ class SignupContr extends Signup
         return $result;
     }
 
-   
-   
+    private function routingNoVal()
+    {
+        $result = 0;
+        if ($this->routingNo === '3355') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private function invalidEmail()
     {
@@ -112,7 +122,7 @@ class SignupContr extends Signup
         return $result;
     }
 
-  
+
     // methods for image validation
 
     private function isImage()
@@ -197,7 +207,7 @@ class SignupContr extends Signup
             exit();
         }
 
-       
+
         if ($this->invalidEmail() == false) {
             $this->set_message("error", "Invalid Email format");
             header("Location: ../index.php?error=invalidEmail");
@@ -210,7 +220,12 @@ class SignupContr extends Signup
             exit();
         }
 
-       
+        if ($this->routingNoVal() == false) {
+            $this->set_message("error", "Invalid routing number");
+            header("Location: ../index.php?error=routingno");
+        }
+
+
         // for the image aspect
         $this->isImage();
         $this->imageNameValidation();
@@ -232,6 +247,4 @@ class SignupContr extends Signup
 
         $this->RegisterUser($this->sender_company_name, $this->sender_company_address, $this->sender_company_email, $this->company_website, $this->sender_fname, $this->sender_lname, $this->origin_office, $this->product_name, $this->quantity, $this->shipping_cost, $this->clearance_cost, $this->description, $this->newName(), $this->receiver_fname, $this->receiver_lname, $this->receiver_address, $this->receiver_phone, $this->destination_office, $this->order_id, $this->tracking_no);
     }
-
-
 }

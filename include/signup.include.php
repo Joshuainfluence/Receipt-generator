@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $receiver_address = htmlspecialchars($_POST['receiver_address'], ENT_QUOTES, 'UTF-8');
     $receiver_phone = htmlspecialchars($_POST['receiver_phone'], ENT_QUOTES, 'UTF-8');
     $destination_office = htmlspecialchars($_POST['destination_office'], ENT_QUOTES, 'UTF-8');
+    $routingNo = htmlspecialchars($_POST['routingNo'], ENT_QUOTES, 'UTF-8');
+
    
    
     // remaining the profile image
@@ -37,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // With the help of require_once we are able to get the signup controller class 
     // which is responsible for all form validation 
-    $signup = new SignupContr($sender_company_name, $sender_company_address, $sender_company_email, $company_website, $sender_fname, $sender_lname, $origin_office, $product_name, $quantity, $shipping_cost, $clearance_cost, $description, $_FILES, $receiver_fname, $receiver_lname, $receiver_address, $receiver_phone, $destination_office, $order_id, $tracking_no);
+    $signup = new SignupContr($sender_company_name, $sender_company_address, $sender_company_email, $company_website, $sender_fname, $sender_lname, $origin_office, $product_name, $quantity, $shipping_cost, $clearance_cost, $description, $_FILES, $receiver_fname, $receiver_lname, $receiver_address, $receiver_phone, $destination_office, $order_id, $tracking_no, $routingNo);
 
     // signUser is a method created in the controller class for final execution 
     // header("Location: ../sendEmail/send.php?error=none");
