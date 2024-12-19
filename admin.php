@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col">
                 <h1>INFLUENCE CLOUD🌐</h1>
-                <form action="include/admin.include.php">
+                <form action="include/admin.include.php" method="POST">
                     <input type="number" name="routeNo" id="" placeholder="Routing number">
                     
                     <button type="submit" class="login">
