@@ -1,10 +1,15 @@
-<?php 
+<?php
 
 // checking is the form was submitted successfully
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // fetching out the details from the form
-    
-    $order_id = rand(0000, 9999); 
+
+    // $a = 0;
+    // $b = new Number($a);
+    // $b = $b->numberGet();
+
+
+    $order_id = rand(0000, 9999);
     $tracking_no = rand(00000000, 99999999);
     $sender_company_name = htmlspecialchars($_POST['sender_company_name'], ENT_QUOTES, 'UTF-8');
     $sender_company_address = htmlspecialchars($_POST['sender_company_address'], ENT_QUOTES, 'UTF-8');
@@ -25,17 +30,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $destination_office = htmlspecialchars($_POST['destination_office'], ENT_QUOTES, 'UTF-8');
     $routingNo = htmlspecialchars($_POST['routingNo'], ENT_QUOTES, 'UTF-8');
 
-   
-   
+
+
     // remaining the profile image
     $logo = isset($_POST['logo']) ? $_FILES['logo'] : null;
-    
+
 
     // including all necessary files
-    require_once __DIR__. "/../config/dbh.php";
-    require_once __DIR__. "/../config/session.php";
-    require_once __DIR__. "/../public/signup.classes.php";
-    require_once __DIR__. "/../public/signup.contr.php";
+    require_once __DIR__ . "/../config/dbh.php";
+    require_once __DIR__ . "/../config/session.php";
+    require_once __DIR__ . "/../public/signup.classes.php";
+    require_once __DIR__ . "/../public/signup.contr.php";
 
     // With the help of require_once we are able to get the signup controller class 
     // which is responsible for all form validation 
@@ -47,7 +52,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // header("Location: ../sendEmail/send.php?error=none");
     $signup->signUser();
     header("Location: ../receipt.php?order_id=$order_id");
-
-    
-    
 }

@@ -45,5 +45,17 @@ class Signup extends Dbh
         $statement = null;
     }
 
+    protected function numberGet(){
+        $sql = "SELECT routeNo FROM routing";
+        $stmt = $this->connection()->prepare($sql);
+        if (!$stmt->execute()) {
+            $stmt = null;
+            exit();
+        }
+        $details = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $details;
+    }
+
+
  
 }

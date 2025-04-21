@@ -24,6 +24,7 @@ class SignupContr extends Signup
     private $order_id;
     private $tracking_no;
     private $routingNo;
+    private $no;
 
 
 
@@ -89,15 +90,30 @@ class SignupContr extends Signup
         return $result;
     }
 
+    // private $a = 0;
+    // public function numberGet()
+    // {
+    //     return $this->getNumber($this->a);
+    // }
+
+
+
+
     private function routingNoVal()
     {
         $result = 0;
-        if ($this->routingNo === '3355') {
+        if ($this->routingNo === '3344') {
             return true;
         } else {
             return false;
         }
     }
+    // private $a = 9;
+
+    // private function isRoutingNoValid($no)
+    // {
+    //     return $this->routingNo === $no;
+    // }
 
 
     private function invalidEmail()
@@ -225,6 +241,12 @@ class SignupContr extends Signup
             header("Location: ../index.php?error=routingno");
         }
 
+        // $result = $this->numberGet();
+        // if (!$result || !$this->isRoutingNoValid($result['routeNo'] ?? null)) {
+        //     $this->set_message("error", "Invalid routing number");
+        //     header("Location: ../index.php?error=routingno");
+        //     exit();
+        // }
 
         // for the image aspect
         $this->isImage();
@@ -248,3 +270,17 @@ class SignupContr extends Signup
         $this->RegisterUser($this->sender_company_name, $this->sender_company_address, $this->sender_company_email, $this->company_website, $this->sender_fname, $this->sender_lname, $this->origin_office, $this->product_name, $this->quantity, $this->shipping_cost, $this->clearance_cost, $this->description, $this->newName(), $this->receiver_fname, $this->receiver_lname, $this->receiver_address, $this->receiver_phone, $this->destination_office, $this->order_id, $this->tracking_no);
     }
 }
+
+
+// class Number extends Signup{
+//     private $a;
+
+//     public function __construct($a)
+//     {
+//         $this->a = $a;
+//     }
+
+//     public function numberGet(){
+//         $this->getNumber($this->a);
+//     }
+// }
